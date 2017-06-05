@@ -153,84 +153,6 @@ process_line__common (char     *line,
 		fr_archive_message (archive, line);
 }
 
-
-/*static void
-fr_command_zip_add (FrCommand  *comm,
-		    const char *from_file,
-		    GList      *file_list,
-		    const char *base_dir,
-		    gboolean    update,
-		    gboolean    follow_links)
-{
-	GList *scan;
-
-	fr_process_set_out_line_func (FR_COMMAND (comm)->process,
-				      process_line__common,
-				      comm);
-
-	fr_process_begin_command (comm->process, "zip");
-
-	if (base_dir != NULL)
-		fr_process_set_working_dir (comm->process, base_dir);
-
-	if (! follow_links)
-		fr_process_add_arg (comm->process, "-y");
-
-	if (update)
-		fr_process_add_arg (comm->process, "-u");
-
-	add_password_arg (comm, FR_ARCHIVE (comm)->password);
-
-	switch (FR_ARCHIVE (comm)->compression) {
-	case FR_COMPRESSION_VERY_FAST:
-		fr_process_add_arg (comm->process, "-1"); break;
-	case FR_COMPRESSION_FAST:
-		fr_process_add_arg (comm->process, "-3"); break;
-	case FR_COMPRESSION_NORMAL:
-		fr_process_add_arg (comm->process, "-6"); break;
-	case FR_COMPRESSION_MAXIMUM:
-		fr_process_add_arg (comm->process, "-9"); break;
-	}
-
-	fr_process_add_arg (comm->process, comm->filename);
-	fr_process_add_arg (comm->process, "--");
-
-	for (scan = file_list; scan; scan = scan->next)
-		fr_process_add_arg (comm->process, scan->data);
-
-	fr_process_end_command (comm->process);
-}
-
-
-static void
-fr_command_zip_delete (FrCommand  *comm,
-		       const char *from_file,
-		       GList      *file_list)
-{
-	GList *scan;
-
-	fr_process_set_out_line_func (FR_COMMAND (comm)->process,
-				      process_line__common,
-				      comm);
-
-	fr_process_begin_command (comm->process, "zip");
-	fr_process_add_arg (comm->process, "-d");
-
-	fr_process_add_arg (comm->process, comm->filename);
-	fr_process_add_arg (comm->process, "--");
-
-	for (scan = file_list; scan; scan = scan->next) {
-		char *escaped;
-
- 		escaped = _g_str_escape (scan->data, ZIP_SPECIAL_CHARACTERS);
- 		fr_process_add_arg (comm->process, escaped);
- 		g_free (escaped);
-	}
-
-	fr_process_end_command (comm->process);
-}*/
-
-
 static void
 fr_command_vpk_extract (FrCommand  *comm,
 			const char *from_file,
@@ -246,14 +168,7 @@ fr_command_vpk_extract (FrCommand  *comm,
 				      process_line__common,
 				      comm);
 
-	fr_process_begin_command (comm->process, "vpk");
 
-	fr_process_add_arg (comm->process, "-x");
-	if (dest_dir != NULL) {
-		fr_process_add_arg (comm->process, dest_dir);
-	} else {
-		fr_process_add_arg (comm->process, "/tmp");
-	}
 	//if (overwrite)
 		//fr_process_add_arg (comm->process, "-o");
 	//else
@@ -268,15 +183,23 @@ fr_command_vpk_extract (FrCommand  *comm,
 	for (scan = file_list; scan; scan = scan->next) {
 		char *escaped;
 
+		fr_process_begin_command (comm->process, "vpk");
+		fr_process_add_arg (comm->process, "-x");
+		if (dest_dir != NULL) {
+			fr_process_add_arg (comm->process, dest_dir);
+		} else {
+			fr_process_add_arg (comm->process, "/tmp");
+		}
+
+		printf("DEBUG: EXTRACT: %s\n", scan->data);
  		escaped = _g_str_escape (scan->data, ZIP_SPECIAL_CHARACTERS);
  		fr_process_add_arg (comm->process, "-f");
  		fr_process_add_arg (comm->process, escaped);
  		g_free (escaped);
+		// Name of the archive
+		fr_process_add_arg (comm->process, comm->filename);
+		fr_process_end_command (comm->process);
 	}
-	// Name of the archive
-	fr_process_add_arg (comm->process, comm->filename);
-
-	fr_process_end_command (comm->process);
 }
 
 

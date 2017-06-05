@@ -5,11 +5,6 @@ file-roller with support for Valve Pak format
 
 More information about fileroller in README-OLD
 
-## Current Status
-
-Viewing of the structure works, so does opening/extrating files.
-Extracting folders does not work (yet).
-
 ## Usage
 
 To make use of the vpk support, the vpk tool has to be installed.
