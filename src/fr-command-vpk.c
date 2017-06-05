@@ -252,7 +252,7 @@ fr_command_zip_handle_error (FrCommand *comm,
 }
 
 
-const char *vpk_mime_type[] = { "application/vpk",
+const char *vpk_mime_type[] = { "application/x-vpk",
 				NULL };
 
 
