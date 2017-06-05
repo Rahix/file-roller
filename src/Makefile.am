@@ -117,6 +117,8 @@ COMMON_SOURCES = 			\
 	fr-command-unstuff.h		\
 	fr-command-zip.c		\
 	fr-command-zip.h		\
+	fr-command-vpk.c		\
+	fr-command-vpk.h		\
 	fr-command-zoo.c		\
 	fr-command-zoo.h		\
 	fr-error.c			\
