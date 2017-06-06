@@ -3,12 +3,26 @@ file-roller-vpk
 
 file-roller with support for Valve Pak format
 
-More information about fileroller in README-OLD
+More information about file-roller in README-OLD
 
-## Usage
+## Installation
 
-To make use of the vpk support, the vpk tool has to be installed.
-This is done with the following command:
+### ArchLinux
+
+For ArchLinux users, there is a [PKGBUILD](https://gist.github.com/Rahix/9350588bb1380f08b7335d3622de9e9c) available.
+
+### Others
+
+```console
+$ ./autogen.sh
+$ make
+$ make install
+```
+
+### VPK tool
+
+Just installing this version of file-roller is not enough to make the vpk support work. For that the python vpk tool
+is required. It can be installed using pip:
 
 ```console
 $ sudo pip install vpk
