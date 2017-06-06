@@ -40,7 +40,6 @@ static void
 list__process_line (char     *line,
 		    gpointer  data)
 {
-	printf("DEBUG: LINE\n");
 	FileData    *fdata;
 	FrCommand   *comm = FR_COMMAND (data);
 	char       **fields;
@@ -56,7 +55,6 @@ list__process_line (char     *line,
 	//if (FR_COMMAND_VPK (comm)->is_empty)
 	//	return;
 
-	printf("Line: %s\n", line);
 	line_l = strlen (line);
 
 	if (line_l == 0)
@@ -73,15 +71,10 @@ list__process_line (char     *line,
 
 	//fields = _g_str_split_line (line, 7);
 	name = strtok(line, " ");
-	printf("DEBUG: NAME: %s\n", name);
 	// skip crc
-	printf("DEBUG: %s\n", strtok(NULL, " "));
 	size_string = strtok(NULL, " ");
-	printf("DEBUG: SIZESTRING: \"%s\"\n", size_string);
-	printf("DEBUG: SIZESTRING(crop): \"%s\"\n", size_string + 5);
 
 	fdata->size = g_ascii_strtoull (size_string + 5, NULL, 10);
-	printf("DEBUG: SIZE: %d\n", fdata->size);
 	fdata->modified = NULL; //mktime_from_string (fields[6]);
 	//fdata->encrypted = (*fields[4] == 'B') || (*fields[4] == 'T');
 	//g_strfreev (fields);
@@ -124,7 +117,6 @@ list__begin (gpointer data)
 static gboolean
 fr_command_vpk_list (FrCommand  *comm)
 {
-	printf("DEBUG: LIST\n");
 	fr_process_set_out_line_func (comm->process, list__process_line, comm);
 
 	fr_process_begin_command (comm->process, "vpk");
@@ -191,7 +183,6 @@ fr_command_vpk_extract (FrCommand  *comm,
 			fr_process_add_arg (comm->process, "/tmp");
 		}
 
-		printf("DEBUG: EXTRACT: %s\n", scan->data);
  		escaped = _g_str_escape (scan->data, ZIP_SPECIAL_CHARACTERS);
  		fr_process_add_arg (comm->process, "-f");
  		fr_process_add_arg (comm->process, escaped);
@@ -259,7 +250,6 @@ const char *vpk_mime_type[] = { "application/x-vpk",
 static const char **
 fr_command_vpk_get_mime_types (FrArchive *archive)
 {
-	printf("DEBUG: MIME\n");
 	return vpk_mime_type;
 }
 
@@ -269,7 +259,6 @@ fr_command_vpk_get_capabilities (FrArchive  *archive,
 			         const char *mime_type,
 				 gboolean    check_command)
 {
-	printf("DEBUG: CAPABILITIES\n");
 	FrArchiveCap capabilities;
 
 	capabilities = FR_ARCHIVE_CAN_STORE_MANY_FILES;
@@ -284,7 +273,6 @@ static const char *
 fr_command_vpk_get_packages (FrArchive  *archive,
 			     const char *mime_type)
 {
-	printf("DEBUG: PACKAGES\n");
 	return PACKAGES ("vpk");
 }
 
@@ -292,7 +280,6 @@ fr_command_vpk_get_packages (FrArchive  *archive,
 static void
 fr_command_vpk_finalize (GObject *object)
 {
-	printf("DEBUG: FINALIZE\n");
 	g_return_if_fail (object != NULL);
 	g_return_if_fail (FR_IS_COMMAND_VPK (object));
 
@@ -304,7 +291,6 @@ fr_command_vpk_finalize (GObject *object)
 static void
 fr_command_vpk_class_init (FrCommandVpkClass *klass)
 {
-	printf("DEBUG: CLASS_INIT\n");
 	GObjectClass   *gobject_class;
 	FrArchiveClass *archive_class;
 	FrCommandClass *command_class;
@@ -332,7 +318,6 @@ fr_command_vpk_class_init (FrCommandVpkClass *klass)
 static void
 fr_command_vpk_init (FrCommandVpk *self)
 {
-	printf("DEBUG: INIT\n");
 	FrArchive *base = FR_ARCHIVE (self);
 
 	base->propAddCanUpdate             = TRUE;
