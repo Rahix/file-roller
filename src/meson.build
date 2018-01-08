@@ -36,6 +36,7 @@ source_files = files(
   'fr-command-unsquashfs.c',
   'fr-command-unstuff.c',
   'fr-command-zip.c',
+  'fr-command-vpk.c',
   'fr-command-zoo.c',
   'fr-error.c',
   'fr-file-selector-dialog.c',
