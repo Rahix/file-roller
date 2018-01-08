@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-vpk">
+	<magic priority="50">
+		<match type="string" offset="0" value="\x34\x12\xAA\x55" />
+	</magic>
+    <glob pattern="*.vpk"/>
+    <generic-icon name="package-x-generic"/>
+    <comment>Valve Pak File</comment>
+  </mime-type>
+</mime-info>
