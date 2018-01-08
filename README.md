@@ -9,14 +9,16 @@ More information about file-roller in README-OLD
 
 ### ArchLinux
 
-For ArchLinux users, there is a [PKGBUILD](https://gist.github.com/Rahix/9350588bb1380f08b7335d3622de9e9c) available.
+For ArchLinux users, there is a [PKGBUILD](https://gist.github.com/Rahix/9350588bb1380f08b7335d3622de9e9c) available. (Currently outdated!)
 
 ### Others
 
 ```console
-$ ./autogen.sh
-$ make
-$ make install
+$ mkdir build
+$ cd build
+$ meson ..
+$ ninja
+$ ninja install
 ```
 
 ### VPK tool
