@@ -9,7 +9,8 @@ More information about file-roller in README-OLD
 
 ### ArchLinux
 
-For ArchLinux users, there is a [PKGBUILD](https://gist.github.com/Rahix/9350588bb1380f08b7335d3622de9e9c) available. (Currently outdated!)
+For ArchLinux users, there is a [PKGBUILD](https://gist.github.com/Rahix/9350588bb1380f08b7335d3622de9e9c#file-pkgbuild-file-roller-vpk) available.
+The gist also contains a [PKGBUILD](https://gist.github.com/Rahix/9350588bb1380f08b7335d3622de9e9c#file-pkgbuild-python-vpk) for `python-vpk`
 
 ### Others
 
